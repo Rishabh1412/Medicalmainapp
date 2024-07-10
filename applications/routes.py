@@ -29,10 +29,10 @@ def login():
             attempted_user=User.query.filter_by(username=form.username.data).first()
             if attempted_user and attempted_user.check_password_correction(attempted_password=form.password.data):
                 login_user(attempted_user)
-                #flash(f'You have successfully logged in as : {attempted_user.username}' , category='success')
+                flash(f'You have successfully logged in as : {attempted_user.username}' , category='success')
                 return redirect(url_for('dashboard'))
             else:
-                flash(f'Username and password do not match ! Please try again', category='danger')
+                flash(f'Username and password do not match ! Please try again', category='error')
                 print("Username and password do not match ! Please try again")
     return render_template('login.html', form=form)
 
@@ -53,7 +53,7 @@ def sign_up():
     
     if form.errors != {}:
         for err_msg in form.errors.values():
-            flash(f'There was an error with creating a user: {err_msg}', category='danger')
+            flash(f'There was an error with creating a user: {err_msg}', category='error')
     
     return render_template('signup.html', form=form)
 

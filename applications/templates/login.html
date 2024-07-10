@@ -42,9 +42,22 @@
             text-decoration: none;
             color: black;
         }
+        .fade-out {
+            animation: fadeOut 1s ease-out forwards;
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
-<body>
+<body style="position: relative; tr">
+    {% include 'flashboot.html' %}
+    
     <div class="container py-5 px-3 rounded shadow ">
         <div class="title d-flex justify-content-between px-5">
             
@@ -72,6 +85,19 @@
             </div>
         </form>
     </div>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          
+            const alerts = document.querySelectorAll('[role="alert"]');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.classList.add('fade-out');
+                    setTimeout(() => {
+                        alert.style.display = 'none';
+                    }, 1000);
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 </html>

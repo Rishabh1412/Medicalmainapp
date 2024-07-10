@@ -42,11 +42,26 @@
             text-decoration: none;
             color: black;
         }
+        .fade-out {
+            animation: fadeOut 1s ease-out forwards;
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
         
         
     </style>
 </head>
-<body>
+<body style="position: relative;">
+    <div style="align-items: center; justify-content:center; display:flex;"></div>
+        {% include 'flashboot.html' %}
+
+    </div>
     <div class="container pt-5 px-3 rounded shadow">
     <div class="title d-flex justify-content-between px-5">
         
@@ -61,7 +76,7 @@
         </div>
         <div class="mb-3 ">
             {{ form.email_address.label() }}
-            {{ form.email_address(class="form-control", placeholder="User Name") }}
+            {{ form.email_address(class="form-control", placeholder="Email") }}
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div class="mb-3">
@@ -75,6 +90,25 @@
         </div>
     </form>
     </div>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            <!-- const closeButtons = document.querySelectorAll('[data-bs-dismiss="alert"]');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    this.parentElement.style.display = 'none';
+                });
+            }); -->
+
+            const alerts = document.querySelectorAll('[role="alert"]');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.classList.add('fade-out');
+                    setTimeout(() => {
+                        alert.style.display = 'none';
+                    }, 1000);
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 </html>
