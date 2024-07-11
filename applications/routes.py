@@ -48,7 +48,7 @@ def sign_up():
             db.session.add(user_data)
             db.session.commit()
             login_user(user_data)
-
+        
         return redirect(url_for('dashboard'))
     
     if form.errors != {}:
